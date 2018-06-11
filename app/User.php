@@ -31,16 +31,16 @@ class User extends Authenticatable
 
     public function follow($userId)
 {
-    // confirm if already following
+   
     $exist = $this->is_following($userId);
-    // confirming that it is not you
+    
     $its_me = $this->id == $userId;
 
     if ($exist || $its_me) {
-        // do nothing if already following
+        
         return false;
     } else {
-        // follow if not following
+        
         $this->followings()->attach($userId);
         return true;
     }
