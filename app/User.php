@@ -48,18 +48,18 @@ class User extends Authenticatable
 
 public function unfollow($userId)
 {
-    // confirming if already following
+    
     $exist = $this->is_following($userId);
-    // confirming that it is not you
+   
     $its_me = $this->id == $userId;
 
 
     if ($exist && !$its_me) {
-        // stop following if following
+  
         $this->followings()->detach($userId);
         return true;
     } else {
-        // do nothing if not following
+       
         return false;
     }
 }
