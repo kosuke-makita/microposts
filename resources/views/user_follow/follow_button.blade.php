@@ -1,3 +1,4 @@
+
 @if (Auth::user()->id != $user->id)
     @if (Auth::user()->is_following($user->id))
         {!! Form::open(['route' => ['user.unfollow', $user->id], 'method' => 'delete']) !!}

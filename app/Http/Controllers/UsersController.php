@@ -17,19 +17,14 @@ class UsersController extends Controller
         return view('users.index', [
             'users' => $users,
         ]);
+        
+        $data += $this->counts($user);
+
+        return view('users.show', $data);
     }
 
     
-    public function create()
-    {
-        //
-    }
 
-  
-    public function store(Request $request)
-    {
-        //
-    }
 
     
     public function show($id)
@@ -40,7 +35,8 @@ class UsersController extends Controller
         $data = [
             'user' => $user,
             'microposts' => $microposts,
-        ];
+            ];
+        
 
         $data += $this->counts($user);
 
@@ -48,18 +44,7 @@ class UsersController extends Controller
     }
 
   
-    public function edit($id)
-    {
-        //
-    }
-
-    
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-   
+ 
     public function destroy($id)
     {
         //
@@ -73,10 +58,6 @@ class UsersController extends Controller
             'user' => $user,
             'users' => $followings,
         ];
-
-        $data += $this->counts($user);
-
-        return view('users.followings', $data);
     }
 
     public function followers($id)
@@ -93,4 +74,19 @@ class UsersController extends Controller
 
         return view('users.followers', $data);
     }
+    public function favoritings($id)
+    {
+        $user = User::find($id);
+        $favoritings = $user->favoritings()->paginate(10);
+
+        $data = [
+            'user' => $user,
+            'users' => $favoritings,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.favoritings', $data);
+    }
+   
 }
