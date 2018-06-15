@@ -83,7 +83,7 @@ public function feed_microposts()
     
      public function favoritings()
     {
-        return $this->belongsToMany(Micropost::class, 'favorite', 'micropost_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(Micropost::class, 'favorite', 'user_id', 'micropost_id')->withTimestamps();
     }
     
     public function favorite($micropostId)
