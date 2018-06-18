@@ -89,14 +89,14 @@ public function feed_microposts()
     public function favorite($micropostId)
 {
     $exist = $this->is_favoriting($micropostId);
-    // confirming that it is not you
-    $its_me = $this->id == $micropostId;
+    
+  //  $its_me = $this->id == $micropostId;
 
-    if ($exist || $its_me) {
-        // do nothing if already following
+    if ($exist) {
+       
         return false;
     } else {
-        // follow if not following
+       
         $this->favoritings()->attach($micropostId);
         return true;
     }
@@ -107,15 +107,15 @@ public function unfavorite($micropostId)
     // confirming if already following
     $exist = $this->is_favoriting($micropostId);
     // confirming that it is not you
-    $its_me = $this->id == $micropostId;
+  //  $its_me = $this->id == $micropostId;
 
 
-    if ($exist && !$its_me) {
-        // stop following if following
+    if ($exist) {
+        
         $this->favoritings()->detach($micropostId);
         return true;
     } else {
-        // do nothing if not following
+       
         return false;
     }
 }
